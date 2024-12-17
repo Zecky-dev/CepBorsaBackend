@@ -1,0 +1,38 @@
+{
+  "name": "cepborsabackend",
+  "version": "1.0.0",
+  "description": "CepBorsa mobil uygulama backend",
+  "main": "app.js",
+  "scripts": {
+    "start": "npx nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zecky-dev/CepBorsaBackend.git"
+  },
+  "keywords": [
+    "cepborsa",
+    "borsa",
+    "backend",
+    "nodejs",
+    "web scraping"
+  ],
+  "author": "Zecky-dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Zecky-dev/CepBorsaBackend/issues"
+  },
+  "homepage": "https://github.com/Zecky-dev/CepBorsaBackend#readme",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cheerio": "^1.0.0",
+    "express": "^4.21.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7",
+    "pretty": "^2.0.0"
+  }
+}
