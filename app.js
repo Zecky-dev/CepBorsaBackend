@@ -12,6 +12,10 @@ const PORT = 3000
 // Routes
 const stockRoutes = require('./routes/stock')
 
+app.get('/', (req, res) => {
+    res.send('Hoş geldiniz! API dökümantasyonu için /api/docs yolunu ziyaret edebilirsiniz.')
+})
+
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 app.use('/api/stock', stockRoutes)
 

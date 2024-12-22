@@ -1,8 +1,8 @@
 const express = require("express");
 
 const {
-  fetchCompanyData,
-  fetchCompanyList,
+  fetchAllStocks,
+  fetchStockData
 } = require("../services/stockServices");
 const { successResponse, errorResponse } = require("../helpers/response");
 
@@ -16,7 +16,7 @@ const router = express.Router();
  *     description: Bir hisse adını girerek verilerini alabilirsiniz.
  *     parameters:
  *       - in: query
- *         name: companyName
+ *         name: stockName
  *         required: true
  *         description: Şirket adı, alt link olmalıdır.
  *         schema:
@@ -28,8 +28,8 @@ const router = express.Router();
  */
 
 router.get("/", async (req, res) => {
-  const { companyName } = req.query;
-  if (!companyName) {
+  const { stockName } = req.query;
+  if (!stockName) {
     return res.status(400).json({
       statusCode: 400,
       message: "Lütfen geçerli bir şirket ismi giriniz!",
@@ -37,8 +37,8 @@ router.get("/", async (req, res) => {
   }
 
   try {
-    const data = await fetchCompanyData(companyName);
-    successResponse(res, data, { companyName });
+    const data = await fetchStockData(stockName);
+    successResponse(res, data, { stockName });
   } catch (error) {
     errorResponse(res, error);
   }
@@ -99,7 +99,7 @@ router.get("/list", async (req, res) => {
   }
 
   try {
-    const data = await fetchCompanyList(year, page);
+    const data = await fetchAllStocks(year, page);
     successResponse(res, data, { year, page, total: data.length });
   } catch (error) {
     errorResponse(res, error);

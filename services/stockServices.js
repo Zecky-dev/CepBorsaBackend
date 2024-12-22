@@ -1,15 +1,19 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-async function fetchCompanyData(companyName) {
-  const url = `https://halkarz.com/${companyName}`;
+async function fetchStockData(stockName) {
+  const url = `https://halkarz.com/${stockName}`;
   const { data } = await axios.get(url);
   const $ = cheerio.load(data);
 
-  const image = $(".detail-page").find("a img").attr("src");
-  const code = $(".il-content .il-bist-kod").text().trim();
-  const name = $(".il-content .il-halka-arz-sirket").text().trim();
-  const companyInfoHTML = $(".sh-content").html();
+  const image = $(".detail-page").find("a img").attr("src").trim();
+  const code = $(".il-content .il-bist-kod").html().trim();
+  const name = $(".il-halka-arz-sirket").html()
+  const companyInfo = {
+    descriptionHTML: $('.sh-content p').html(),
+    foundCity: $('.shc-city').text().split(' : ')[1].trim(),
+    foundYear: $('.shc-founded').text().split(' : ')[1].trim()
+  }  
   const tableData = [];
 
   const fiiliDolasimVar = $(".sp-table tbody tr")
@@ -57,11 +61,11 @@ async function fetchCompanyData(companyName) {
     image,
     code,
     name,
-    companyInfoHTML,
+    companyInfo,
   };
 }
 
-async function fetchCompanyList(year, page) {
+async function fetchAllStocks(year, page) {
   const url = `https://halkarz.com/k/halka-arz/${year}/page/${page}`;
   const { data } = await axios.get(url);
   const $ = cheerio.load(data);
@@ -93,6 +97,6 @@ async function fetchCompanyList(year, page) {
 }
 
 module.exports = {
-  fetchCompanyData,
-  fetchCompanyList,
+  fetchStockData,
+  fetchAllStocks,
 };
