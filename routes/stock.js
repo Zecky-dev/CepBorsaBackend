@@ -1,10 +1,7 @@
-const express = require("express");
+import express from 'express'
+import { fetchAllStocks, fetchStockData } from '../services/stockServices.js'
 
-const {
-  fetchAllStocks,
-  fetchStockData
-} = require("../services/stockServices");
-const { successResponse, errorResponse } = require("../helpers/response");
+import { successResponse, errorResponse } from '../helpers/response.js'
 
 const router = express.Router();
 
@@ -106,4 +103,4 @@ router.get("/list", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router

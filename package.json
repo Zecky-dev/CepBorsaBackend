@@ -11,6 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/Zecky-dev/CepBorsaBackend.git"
   },
+  "type": "module",
   "keywords": [
     "cepborsa",
     "borsa",
@@ -25,9 +26,15 @@
   },
   "homepage": "https://github.com/Zecky-dev/CepBorsaBackend#readme",
   "dependencies": {
+    "@google/generative-ai": "^0.21.0",
     "axios": "^1.7.9",
     "cheerio": "^1.0.0",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "franc-min": "^6.2.0",
+    "groq-sdk": "^0.9.1",
+    "languagedetect": "^2.0.0",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },

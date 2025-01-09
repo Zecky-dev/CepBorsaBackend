@@ -31,7 +31,7 @@ function errorResponse(res, error) {
   }
 }
 
-module.exports = {
+export {
     successResponse,
     errorResponse
 }

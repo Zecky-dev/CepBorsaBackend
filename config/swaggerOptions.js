@@ -24,6 +24,5 @@ const swaggerOptions = {
     apis: ['./routes/*.js'],
 }
 
-module.exports = swaggerOptions
-
+export default swaggerOptions
 

@@ -1,8 +1,9 @@
-const express = require('express')
+import express from 'express'
+import swaggerOptions from './config/swaggerOptions.js'
+import swaggerUi from 'swagger-ui-express'
+import swaggerJSDoc from 'swagger-jsdoc'
 
-const swaggerOptions = require('./config/swaggerOptions')
-const swaggerUi = require('swagger-ui-express')
-const swaggerJSDoc = require('swagger-jsdoc')
+import 'dotenv/config'
 
 const swaggerDocs = swaggerJSDoc(swaggerOptions)
 
@@ -10,7 +11,8 @@ const app = express()
 const PORT = 3000
 
 // Routes
-const stockRoutes = require('./routes/stock')
+import stockRoutes from './routes/stock.js'
+import botRoutes from './routes/bot.js'
 
 app.get('/', (req, res) => {
     res.send('Hoş geldiniz! API dökümantasyonu için /api/docs yolunu ziyaret edebilirsiniz.')
@@ -18,6 +20,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 app.use('/api/stock', stockRoutes)
+app.use('/api/bot', botRoutes)
 
 // 404 for other endpoints
 app.use((_, res) => {

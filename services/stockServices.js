@@ -1,11 +1,13 @@
-const axios = require("axios");
-const cheerio = require("cheerio");
+import axios from "axios";
+import * as cheerio from 'cheerio';
+import CryptoJS from "crypto-js";
 
 async function fetchStockData(stockName) {
   const url = `https://halkarz.com/${stockName}`;
   const { data } = await axios.get(url);
   const $ = cheerio.load(data);
 
+  const id = CryptoJS.SHA256(url).toString();
   const image = $(".detail-page").find("a img").attr("src").trim();
   const code = $(".il-content .il-bist-kod").html().trim();
   const name = $(".il-halka-arz-sirket").html()
@@ -62,6 +64,7 @@ async function fetchStockData(stockName) {
     code,
     name,
     companyInfo,
+    id
   };
 }
 
@@ -96,7 +99,7 @@ async function fetchAllStocks(year, page) {
   return halkaArzListesi;
 }
 
-module.exports = {
-  fetchStockData,
+export {
   fetchAllStocks,
-};
+  fetchStockData
+}
