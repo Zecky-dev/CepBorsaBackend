@@ -1,5 +1,5 @@
 import Groq from "groq-sdk";
-const groq = new Groq({ apiKey: process.env.API_KEY });
+const groq = new Groq({ apiKey: process.env.BOT_API_KEY });
 
 async function askQuestion(question) {
   try {
