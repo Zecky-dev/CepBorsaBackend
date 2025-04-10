@@ -14,6 +14,11 @@ const PORT = 3000
 import stockRoutes from './routes/stock.js'
 import botRoutes from './routes/bot.js'
 import currencyRoutes from './routes/currency.js'
+import userRoutes from './routes/user.js'
+
+// Body parser
+app.use(express.json())
+app.use(express.urlencoded({ extended: true, limit: "100mb" }))
 
 app.get('/', (req, res) => {
     res.send('Hoş geldiniz! API dökümantasyonu için /api/docs yolunu ziyaret edebilirsiniz.')
@@ -23,6 +28,7 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
 app.use('/api/stock', stockRoutes)
 app.use('/api/bot', botRoutes)
 app.use('/api/currency', currencyRoutes)
+app.use('/api/user', userRoutes);
 
 // 404 for other endpoints
 app.use((_, res) => {
@@ -30,8 +36,4 @@ app.use((_, res) => {
         statusCode: 404,
         error: "Ulaşmaya çalıştığınız nokta bulunmuyor!"
     })
-})
-
-app.listen(PORT, () => {
-    console.log(`Server çalışıyor: http://localhost:${PORT}`)
 })

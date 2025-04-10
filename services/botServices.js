@@ -13,8 +13,7 @@ async function askQuestion(question) {
           * DİL KONTROLÜ:
             - Sorunun dilini tespit et:
               - Sorunun dili Türkçe veya İngilizce olmalıdır
-              - Soru dili Türkçe ise Türkçe cevap üret
-              - Soru dili İngilizce ise İngilizce cevap üret
+              - Soru dili Türkçe veya İngilizce ise cevap üret
             - Soru dili Türkçe veya İngilizce dışında ise SADECE aşağıdaki cevabı üret:
               - "Üzgünüm, sadece Türkçe ve İngilizce dillerinde hizmet verebilmekteyim.\nSorry, I can only provide service in Turkish and English."
             
@@ -44,8 +43,8 @@ async function askQuestion(question) {
   
           * YANIT:
               - Yanıtlanamayacak türden bir konuda soru sorulmuş ise sorunun sorulduğu dile bağlı olarak aşağıdaki SADECE aşağıdaki cevabı üret:
-                - Türkçe: "Üzgünüm, yalnızca ekonomi, finans ve bankacılık alanlarındaki sorularınızı yanıtlayabilirim."
-                - English: "Sorry, I can only answer questions related to economics, finance, and banking."
+                Dil = Türkçe ise "Üzgünüm, yalnızca ekonomi, finans ve bankacılık alanlarındaki sorularınızı yanıtlayabilirim."
+                Dil = İngilizce ise "Sorry, I can only answer questions related to economics, finance, and banking."
               - Yanıtlanabilecek türden bir soru sorulmuş ise:
                 - Kısa Özet
                 - Detaylı Açıklama

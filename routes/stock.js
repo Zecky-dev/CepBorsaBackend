@@ -1,7 +1,7 @@
-import express from 'express'
-import { fetchAllStocks, fetchStockData } from '../services/stockServices.js'
+import express from "express";
+import { fetchAllStocks, fetchStockData } from "../services/stockServices.js";
 
-import { successResponse, errorResponse } from '../helpers/response.js'
+import { successResponse, errorResponse } from "../helpers/response.js";
 
 const router = express.Router();
 
@@ -103,4 +103,4 @@ router.get("/list", async (req, res) => {
   }
 });
 
-export default router
+export default router;
