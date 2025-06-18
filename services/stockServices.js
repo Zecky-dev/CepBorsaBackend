@@ -5,14 +5,20 @@ import CryptoJS from "crypto-js";
 async function fetchStockData(stockName) {
   try {
     const url = `https://halkarz.com/${stockName}`;
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+        "Accept-Language": "tr-TR,tr;q=0.9,en;q=0.8",
+      },
+    });
     const $ = cheerio.load(data);
 
     const id = CryptoJS.SHA256(url).toString();
     const image = $(".detail-page").find("a img").attr("src")?.trim() || "";
     const code = $(".il-content .il-bist-kod").html()?.trim() || "";
     const name = $(".il-halka-arz-sirket").html()?.trim() || "";
-    
+
     const companyInfo = {
       descriptionHTML: $(".sh-content p").html()?.trim() || "",
       foundCity: $(".shc-city").text()?.split(" : ")[1]?.trim() || "",
@@ -57,7 +63,7 @@ async function fetchStockData(stockName) {
       if (secondTd) {
         tableData.push(secondTd);
       } else {
-        tableData.push(""); 
+        tableData.push("");
       }
     });
 
@@ -80,7 +86,13 @@ async function fetchStockData(stockName) {
 async function fetchAllStocks(year, page) {
   try {
     const url = `https://halkarz.com/k/halka-arz/${year}/page/${page}`;
-    const { data } = await axios.get(url);
+    const { data } = await axios.get(url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+        "Accept-Language": "tr-TR,tr;q=0.9,en;q=0.8",
+      },
+    });
     const $ = cheerio.load(data);
 
     const halkaArzListesi = [];
@@ -116,7 +128,7 @@ async function fetchAllStocks(year, page) {
 
     return halkaArzListesi;
   } catch (error) {
-    return []
+    return [];
   }
 }
 
