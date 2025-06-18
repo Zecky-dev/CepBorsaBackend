@@ -5,13 +5,8 @@ import CryptoJS from "crypto-js";
 async function fetchStockData(stockName) {
   try {
     const url = `https://halkarz.com/${stockName}`;
-    const { data } = await axios.get(url, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
-        "Accept-Language": "tr-TR,tr;q=0.9,en;q=0.8",
-      },
-    });
+    const scraperUrl = `http://api.scraperapi.com/?api_key=${process.env.SCRAPER_API_KEY}&url=${encodeURIComponent(url)}`;
+    const { data } = await axios.get(scraperUrl);
     const $ = cheerio.load(data);
 
     const id = CryptoJS.SHA256(url).toString();
@@ -86,7 +81,8 @@ async function fetchStockData(stockName) {
 async function fetchAllStocks(year, page) {
   try {
     const url = `https://halkarz.com/k/halka-arz/${year}/page/${page}`;
-    const { data } = await axios.get(url, {
+    const scraperUrl = `http://api.scraperapi.com/?api_key=${process.env.SCRAPER_API_KEY}&url=${encodeURIComponent(url)}`;
+    const { data } = await axios.get(scraperUrl, {
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
@@ -101,7 +97,7 @@ async function fetchAllStocks(year, page) {
 
     if (listItems.length === 0) {
       console.log(`No data found for year: ${year}, page: ${page}`);
-      return []; // Boş dizi dön
+      return [];
     }
 
     listItems.each((index, element) => {
